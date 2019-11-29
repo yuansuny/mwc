@@ -22,10 +22,10 @@ options:
 	2 -- ranking-based measure
 	3 -- kernel SVM, dual (training and testing are slow)
 	4 -- linear SVM, primal (training and testing are fast)
-    -n : whether training is required (default 0)
+    -n : set whether training is required (default 0)
 	0 -- training is not required; using ML model already trained
 	1 -- training is required; train a ML model to use; the training graphs can be specified in the src/main.cpp file; the optimal solutions for the training graphs are required.
-    -k kernel_type : set type of kernel function for kernel SVM (default 2)"
+    -k : set kernel type for kernel SVM (default 2)"
 	0 -- linear: u'*v"
 	1 -- polynomial: (gamma*u'*v + coef0)^degree
 	2 -- radial basis function: exp(-gamma*|u-v|^2)
