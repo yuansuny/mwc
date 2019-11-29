@@ -48,13 +48,13 @@ examples:
 -----------
 References:
 -----------
-Sun Y, Li X, Erst A. Using Statistical Measures and Machine Learning for Graph Reduction to Solve Maximum Weight Clique Problems. IEEE Transactions on Pattern Analysis and Machine Intelligence, accepted in Nov 2019. 
+Sun Y, Li X, Ernst A. Using Statistical Measures and Machine Learning for Graph Reduction to Solve Maximum Weight Clique Problems. IEEE Transactions on Pattern Analysis and Machine Intelligence, accepted in Nov 2019. 
 
 --------
 License:
 --------
 This program is to be used under the terms of the GNU General Public License 
 (http://www.gnu.org/copyleft/gpl.html).
-Author: Yuan SUN
-e-mail: yuan.sun@rmit.edu.au OR suiyuanpku@gmail.com
-Copyright notice: (c) 2019 Yuan SUN
+Author: Yuan SUN, Xiaodong LI & Andreas Ernst
+e-mail: yuan.sun@rmit.edu.au, xiaodong.li@rmit.edu.au, andreas.ernst@monash.edu
+Copyright notice: (c) 2019 Yuan SUN, Xiaodong LI & Andreas Ernst
