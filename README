@@ -41,7 +41,7 @@ examples:
 ./MWC p_hat1000-2                       : solve the graph p_hat1000-2.wclq using default parameter setting (kernel SVM etc).
 ./MWC -m 0 p_hat1000-2                  : solve the original graph p_hat1000-2.wclq without problem reduction.
 ./MWC -m 4 p_hat1000-2                  : solve the graph p_hat1000-2.wclq using linear SVM as preprocessing method. 
-./MWC -m 1 -t 100 p_hat1000-2           : solve the graph p_hat1000-2.wclq using correlation-based measure as as preprocessing method with cutoff time set to 100 seconds.
+./MWC -m 1 -t 100 p_hat1000-2           : solve the graph p_hat1000-2.wclq using correlation-based measure as preprocessing method with cutoff time set to 100 seconds.
 ./MWC -m 3 -n 1 -k 1 -a 100 p_hat1000-2 : train a SVM model with polynomial kernel and penalty a=100 to solve the graph p_hat1000-2.wclq; you can specify the training graphs in the src/main.cpp file. 
  
 
