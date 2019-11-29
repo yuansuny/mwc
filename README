@@ -24,7 +24,7 @@ options:
 	4 -- linear SVM, primal (training and testing are fast)
     -n : whether training is needed (default 0)
 	0 -- training is not required; using ML model already trained
-	1 -- training is required; train a ML model to use; the training graphs can be specified in the src/main.cpp file; the optimal solution for the training graphs are required.
+	1 -- training is required; train a ML model to use; the training graphs can be specified in the src/main.cpp file; the optimal solutions for the training graphs are required.
     -k kernel_type : set type of kernel function for kernel SVM (default 2)"
 	0 -- linear: u'*v"
 	1 -- polynomial: (gamma*u'*v + coef0)^degree
