@@ -1,0 +1,60 @@
+This repository contains the c++ source codes of the machine learning model for problem reduction for solving maximum weight clique problems.
+
+------------------
+install & compile:
+------------------
+packages required: 1) cmake-2.8.4 or above; and 2) gcc-7.3.0 or above
+install: git clone https://github.com/yuansuny/mwc.git
+compile: 1) move to the directory: 'cd MWC'
+	 2) create a build directory: 'mkdir build'
+         3) move to the build directory: 'cd build'
+         4) run cmake 'cmake ..'
+         5) run makefile 'make'
+
+------
+usage:
+------
+Usage: ./MWC [options] datafile
+options: 
+    -m : set problem reduction method (default 3)
+	0 -- no problem reduction
+	1 -- correlation-based measure
+	2 -- ranking-based measure
+	3 -- kernel SVM, dual (training and testing are slow)
+	4 -- linear SVM, primal (training and testing are fast)
+    -n : whether training is needed (default 0)
+	0 -- training is not required; using ML model already trained
+	1 -- training is required; train a ML model to use; the training graphs can be specified in the src/main.cpp file; the optimal solution for the training graphs are required.
+    -k kernel_type : set type of kernel function for kernel SVM (default 2)"
+	0 -- linear: u'*v"
+	1 -- polynomial: (gamma*u'*v + coef0)^degree
+	2 -- radial basis function: exp(-gamma*|u-v|^2)
+	3 -- sigmoid: tanh(gamma*u'*v + coef0)
+    -t : set the cutoff time in seconds (default 1000 seconds)
+    -c : set the threshold for correlation-based measure (default 0.0)
+    -r : set the threshold for ranking-based measure (default 0.01)
+    -a : set the penalty for miss-classifying positive data for SVM em*num0/num1 (default 10)
+
+---------
+examples:
+---------
+./MWC p_hat1000-2                     : solve the graph p_hat1000-2.wclq using default parameter setting (kernel SVM etc).
+./MWC -m 0 p_hat1000-2                : solve the original graph p_hat1000-2.wclq without problem reduction.
+./MWC -m 4 p_hat1000-2                : solve the graph p_hat1000-2.wclq using linear SVM as preprocessing method. 
+./MWC -m 1 -t 100 p_hat1000-2         : solve the graph p_hat1000-2.wclq using correlation-based measure as as preprocessing method with cutoff time set to 100 seconds.
+./MWC -m 3 -n 1 -a 100 p_hat1000-2    : train a linear SVM with penalty a=100 to solve the graph p_hat1000-2.wclq; you can specify the training graphs in the src/main.cpp file. 
+ 
+
+-----------
+References:
+-----------
+Sun Y, Li X, Erst A. Using Statistical Measures and Machine Learning for Graph Reduction to Solve Maximum Weight Clique Problems. IEEE Transactions on Pattern Analysis and Machine Intelligence, accepted in Nov 2019. 
+
+--------
+License:
+--------
+This program is to be used under the terms of the GNU General Public License 
+(http://www.gnu.org/copyleft/gpl.html).
+Author: Yuan SUN
+e-mail: yuan.sun@rmit.edu.au OR suiyuanpku@gmail.com
+Copyright notice: (c) 2019 Yuan SUN
