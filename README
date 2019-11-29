@@ -1,7 +1,7 @@
 This repository contains the c++ source codes of the machine learning model for problem reduction to solve maximum weight clique problems.
 
 ------------------
-install & compile:
+Install & compile:
 ------------------
 packages required: 1) cmake-2.8.4 or above; and 2) gcc-7.3.0 or above
 install: 'git clone https://github.com/yuansuny/mwc.git'
@@ -12,7 +12,7 @@ compile: 1) move to the directory: 'cd mwc'
          5) run makefile: 'make'
 
 ------
-usage:
+Usage:
 ------
 Usage: ./MWC [options] datafile
 options: 
@@ -36,7 +36,7 @@ options:
     -a : set the penalty for miss-classifying positive data for SVM em*num0/num1 (default 10)
 
 ---------
-examples:
+Examples:
 ---------
 ./MWC p_hat1000-2                       : solve the graph p_hat1000-2.wclq using default parameter setting (kernel SVM etc).
 ./MWC -m 0 p_hat1000-2                  : solve the original graph p_hat1000-2.wclq without problem reduction.
