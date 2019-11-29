@@ -24,7 +24,7 @@ namespace MWC {
         std::vector<std::uint32_t> opt_sol;
         while(!opt_file.eof()) {
             getline(opt_file, line);
-            if (line == "EOF" || line == "-1") {
+            if (line[0] == 'E' || line[0] == '-') {
                 break;
             }
             if (READ_Point){
@@ -33,7 +33,7 @@ namespace MWC {
                     opt_sol.push_back(node - 1);
                 }
             }
-            if (line == "Optimal solution"){
+            if (line[0] == 'O'){
                 READ_Point = 1;
             }
         }
