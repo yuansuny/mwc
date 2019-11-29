@@ -5,7 +5,7 @@ install & compile:
 ------------------
 packages required: 1) cmake-2.8.4 or above; and 2) gcc-7.3.0 or above
 install: git clone https://github.com/yuansuny/mwc.git
-compile: 1) move to the directory: 'cd MWC'
+compile: 1) move to the directory: 'cd mwc'
 	 2) create a build directory: 'mkdir build'
          3) move to the build directory: 'cd build'
          4) run cmake 'cmake ..'
