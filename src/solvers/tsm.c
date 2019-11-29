@@ -2983,14 +2983,17 @@ int tsm(char* File_Name1, const char* resPath1, int NB_NODE1, int NB_EDGE1, doub
 
     Node_Neibors = (int **) malloc((NB_NODE + 1) * sizeof(int *));
 	allcoate_memory_for_adjacency_list(NB_NODE, NB_EDGE, 0);
-
-    Node_Neibors = AdjacentList;
-
-    for (int i = 1; i <= NB_NODE; i++){
-        Node_Degree[i] = Node_Degree1[i];
-        Node_Weight[i] = Node_Bound1[i];
-        Top_Weight[i] = Node_Weight1[i];
+    for (int i = 0; i < NB_NODE; i++){
+        Node_Degree[i+1] = Node_Degree1[i];
+        Node_Weight[i+1] = Node_Bound1[i];
+        Top_Weight[i+1] = Node_Weight1[i];
+        Node_Neibors[i+1] = (int *) malloc((Node_Degree[i+1]+1) * sizeof(int));
+        for (int j = 0u; j < Node_Degree[i+1]; ++j){
+            Node_Neibors[i+1][j] = AdjacentList[i][j] + 1;
+        }
+        Node_Neibors[i+1][Node_Degree[i+1]] = NONE;
     }
+
 	int ret = 0;
 	FORMAT = 1;
 	INIT_ORDERING = 1;

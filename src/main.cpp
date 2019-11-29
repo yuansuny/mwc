@@ -26,11 +26,16 @@ void exit_and_help(){
 	std::cout << "-n : if training is needed (default 0)" << std::endl;
 	std::cout << "0 -- training is not required; using ML model already trained" << std::endl;
 	std::cout << "1 -- training is required; train a ML model to use" << std::endl;
-	std::cout << "-k kernel_type : set type of kernel function for kernel SVM (default 2)" << std::endl;
+	std::cout << "-k : set type of kernel function for kernel SVM (default 2)" << std::endl;
 	std::cout << "0 -- linear: u'*v" << std::endl;
 	std::cout << "1 -- polynomial: (gamma*u'*v + coef0)^degree" << std::endl;
 	std::cout << "2 -- radial basis function: exp(-gamma*|u-v|^2)" << std::endl;
 	std::cout << "3 -- sigmoid: tanh(gamma*u'*v + coef0)" << std::endl;
+	std::cout << "-s : set solution method to solve the reduce problem (default 0)" << std::endl;
+	std::cout << "0 -- TSM" << std::endl;
+	std::cout << "1 -- WLMC" << std::endl;
+	std::cout << "2 -- LSCC" << std::endl;
+	std::cout << "3 -- FastWCLQ" << std::endl;
 	std::cout << "-t : set the cutoff time in seconds (default 1000)" << std::endl;
 	std::cout << "-c : set the threshold for correlation-based measure (default 0.0)" << std::endl;
 	std::cout << "-r : set the threshold for ranking-based measure (default 0.01)" << std::endl;
@@ -48,6 +53,7 @@ int main(int argc, char* argv[]) {
     double param_threshold_c = 0.0;  //threshold for correlation-based measure.
     double param_threshold_a = 10;   //penalty for miss-classifying positive data: param_thre_m*num0/num1.
     int    param_kernel_type = 2;    //kernel SVM type: 0 (linear); 1 (polynomial); 2 (RBF); 3 (sigmoid)
+    int    param_solver_type = 0;    //solution method type: 0 (TSM); 1 (WLMC); 2 (LSCC); 3 (FastWCLQ)
 
     // parse options (parameters)
 	for(int i = 1; i < argc; ++i){
@@ -78,6 +84,9 @@ int main(int argc, char* argv[]) {
                 break;
             case 'k':
 				param_kernel_type = std::atoi(argv[i]);
+				break;
+            case 's':
+				param_solver_type = std::atoi(argv[i]);
 				break;
 			default:
 				std::cout << "Unknown option: " << argv[i-1][1] << std::endl;
@@ -167,7 +176,18 @@ int main(int argc, char* argv[]) {
         output_file_time << w2 - w1 <<", ";
 
         auto solver = Solver(graph, reduce, param_cutoff-(w2-w0));
-        solver.solve_mwc_tsm();
+        if (param_solver_type == 0){
+            solver.solve_mwc_tsm();
+        }else if (param_solver_type == 1){
+            solver.solve_mwc_wlmc();
+        } else if (param_solver_type == 2){
+            solver.solve_mwc_lscc();
+        } else if (param_solver_type == 3){
+            solver.solve_mwc_fastwclq();
+        } else{
+            std::cout << "Solution method is not supported" << std::endl;
+            exit_and_help();
+        }
 
         if (solver.get_objective_value() > reduce.get_objective_value_sampling()){
             output_file_obj << solver.get_objective_value() << std::endl;
@@ -183,7 +203,7 @@ int main(int argc, char* argv[]) {
         output_file_time << w3 - w1 << std::endl;
         output_file_time.close();
 
-        if (i == 0u){
+        if (i == 0u && param_solver_type == 0){
             auto best_sol = solver.get_best_solution();
             std::string output_sol_filename;
             output_sol_filename = output_dir + input_file_name + ".sol";

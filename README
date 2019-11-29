@@ -25,11 +25,16 @@ options:
     -n : set whether training is required (default 0)
 	0 -- training is not required; using ML model already trained
 	1 -- training is required; train a ML model to use; the training graphs can be specified in the src/main.cpp file; the optimal solutions for the training graphs are required.
-    -k : set kernel type for kernel SVM (default 2)"
-	0 -- linear: u'*v"
+    -k : set kernel type for kernel SVM (default 2)
+	0 -- linear: u'*v
 	1 -- polynomial: (gamma*u'*v + coef0)^degree
 	2 -- radial basis function: exp(-gamma*|u-v|^2)
 	3 -- sigmoid: tanh(gamma*u'*v + coef0)
+    -s : set solution method to solve the reduce problem (default 0)
+	0 -- TSM
+	1 -- WLMC
+	2 -- LSCC
+	3 -- FastWCLQ
     -t : set the cutoff time in seconds (default 1000 seconds)
     -c : set the threshold for correlation-based measure (default 0.0)
     -r : set the threshold for ranking-based measure (default 0.01)
@@ -38,10 +43,10 @@ options:
 ---------
 Examples:
 ---------
-./MWC p_hat1000-2                       : solve the graph p_hat1000-2.wclq using default parameter setting (kernel SVM etc).
-./MWC -m 0 p_hat1000-2                  : solve the original graph p_hat1000-2.wclq without problem reduction.
-./MWC -m 4 p_hat1000-2                  : solve the graph p_hat1000-2.wclq using linear SVM as preprocessing method. 
-./MWC -m 1 -c 0.01 -t 100 p_hat1000-2   : solve the graph p_hat1000-2.wclq using correlation-based measure with threashold 0.01 as preprocessing method; cutoff time set to 100 seconds.
+./MWC p_hat1000-2                       : solve the graph p_hat1000-2.wclq using default parameter setting (kernel SVM, TSM etc).
+./MWC -m 0 -s 2 p_hat1000-2             : solve the original graph p_hat1000-2.wclq using LSCC without problem reduction.
+./MWC -m 4 -s 1 p_hat1000-2             : solve the graph p_hat1000-2.wclq using WLMC with the linear SVM as preprocessing method. 
+./MWC -m 1 -c 0.01 -t 100 p_hat1000-2   : solve the graph p_hat1000-2.wclq using TSM (default) and the correlation-based measure (threashold 0.01) as preprocessing method; cutoff time set to 100 seconds.
 ./MWC -m 3 -n 1 -k 1 -a 100 p_hat1000-2 : train a SVM model with polynomial kernel and penalty a=100 to solve the graph p_hat1000-2.wclq; you can specify the training graphs in the src/main.cpp file. 
  
 
@@ -55,6 +60,6 @@ License:
 --------
 This program is to be used under the terms of the GNU General Public License 
 (http://www.gnu.org/copyleft/gpl.html).
-Author: Yuan SUN, Xiaodong LI & Andreas Ernst
+Author: Yuan Sun, Xiaodong Li & Andreas Ernst
 e-mail: yuan.sun@rmit.edu.au, xiaodong.li@rmit.edu.au, andreas.ernst@monash.edu
 Copyright notice: (c) 2019 Yuan Sun, Xiaodong Li & Andreas Ernst
