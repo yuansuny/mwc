@@ -38,7 +38,7 @@ options:
     -t : set the cutoff time in seconds (default 1000 seconds)
     -c : set the threshold for correlation-based measure (default 0.0)
     -r : set the threshold for ranking-based measure (default 0.01)
-    -a : set the penalty for miss-classifying positive data for SVM em*num0/num1 (default 10)
+    -a : set the penalty for miss-classifying positive data for SVM a*num0/num1 (default 10)
 
 ---------
 Examples:
