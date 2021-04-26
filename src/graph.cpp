@@ -16,7 +16,8 @@ namespace MWC {
         std::ifstream opt_file(opt_file_name);
         if (!opt_file){
             std::cout << "optimal solution is not provided \n";
-            exit(1);
+//             exit(1);
+            return;
         }
         std::string line;
         bool READ_Point = 0;
